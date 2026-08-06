@@ -1,12 +1,16 @@
-import React from "react";
+import Sidebar from "./components/SideBar";
+import ItemGrid from "./components/ItemGrid";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <h1>🚗 Marketplace de Repuestos Guatemala</h1>
-      <p>Bienvenido al catálogo local de repuestos.</p>
+    <div className="marketplace-layout">
+      <div className="marketplace-body">
+        <Sidebar />
+
+        <ItemGrid />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
