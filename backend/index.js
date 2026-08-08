@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const db = require("./config/db.js");
-const repuestosRoutes = require("./routes/repuestos.js");
+const publicacionesRouter = require("./routes/publicaciones.routes.js");
 
 const app = express();
 
@@ -11,12 +11,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// get a repuestos
-app.use("/api/repuestos", repuestosRoutes);
-
-app.get("/api", (req, res) => {
-  res.json({ status: "ok", mensaje: "API funcionando al 100%" });
-});
+app.use("/api/publicaciones", publicacionesRouter);
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor en http://localhost:${PORT}`);
