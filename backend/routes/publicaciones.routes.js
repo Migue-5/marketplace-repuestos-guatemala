@@ -5,7 +5,7 @@ const {
   crearPublicacionC,
   actualizarPublicacionC,
   eliminarPublicacionC,
-} = require("../controllers/controller.publicaciones");
+} = require("../controllers/publicaciones.controller");
 
 const router = express.Router();
 
