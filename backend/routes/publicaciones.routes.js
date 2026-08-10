@@ -1,4 +1,5 @@
 const express = require("express");
+const verificarToken = require("../middlewares/auth.middleware");
 const {
   obtenerPublicacionesC,
   obtenerPubPorIdC,
@@ -11,8 +12,8 @@ const router = express.Router();
 
 router.get("/", obtenerPublicacionesC);
 router.get("/:id", obtenerPubPorIdC);
-router.post("/", crearPublicacionC);
-router.put("/:id", actualizarPublicacionC);
-router.delete("/:id", eliminarPublicacionC);
+router.post("/", verificarToken, crearPublicacionC);
+router.put("/:id", verificarToken, actualizarPublicacionC);
+router.delete("/:id", verificarToken, eliminarPublicacionC);
 
 module.exports = router;
