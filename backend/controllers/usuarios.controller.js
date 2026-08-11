@@ -54,7 +54,11 @@ const loginUsuario = async (req, res) => {
       { expiresIn: "2h" },
     );
 
-    res.status(200).json({ mensaje: "login exitoso", token });
+    res.status(200).json({
+      mensaje: "login exitoso",
+      token,
+      usuario: { id: usuario.id, nombre: usuario.nombre, email: usuario.email },
+    });
   } catch (error) {
     res.status(500).json({ mensaje: "error al ingresar " });
   }
