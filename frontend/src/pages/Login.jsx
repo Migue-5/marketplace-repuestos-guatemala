@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -25,25 +25,29 @@ const Login = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmint}>
-      <label htmlFor="email">Email</label>
-      <input
-        type="text"
-        id="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+    <div>
+      <h2>Iniciar sesion</h2>
 
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {error && <p>{error}</p>}
-      <button type="submit">Login</button>
-    </form>
+      <form onSubmit={handleSubmint}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {error && <p>{error}</p>}
+        <button type="submit">Login</button>
+      </form>
+    </div>
   );
 };
 
