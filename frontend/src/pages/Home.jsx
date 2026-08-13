@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import ItemCard from "../components/ItemCard";
 
 const Home = () => {
   const [publicaciones, setPublicaciones] = useState([]);
@@ -28,7 +29,7 @@ const Home = () => {
       {!cargando && !error && (
         <ul>
           {publicaciones.map((pub) => (
-            <li key={pub.id}>{pub.titulo}</li>
+            <ItemCard key={pub.id} publicacion={pub} />
           ))}
         </ul>
       )}

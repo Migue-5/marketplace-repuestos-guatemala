@@ -2,7 +2,21 @@ const db = require("../config/db");
 
 // obtener todas
 const obtenerPublicaciones = async () => {
-  const query = "SELECT * FROM publicaciones";
+  const query = `
+  SELECT 
+  publicaciones.id,
+  publicaciones.titulo,
+  publicaciones.descripcion,
+  publicaciones.precio,
+  publicaciones.tipo,
+  publicaciones.estado,
+  categorias.nombre AS categoria,
+  ubicaciones.departamento,
+  ubicaciones.municipio
+  FROM publicaciones
+  inner join categorias on publicaciones.categoria_id = categorias.id
+  inner join ubicaciones on publicaciones.ubicacion_id = ubicaciones.id
+  `;
   const resultado = await db.query(query);
 
   return resultado[0];
@@ -10,7 +24,22 @@ const obtenerPublicaciones = async () => {
 
 // obtener por id
 const obtenerPubPorID = async (id) => {
-  const query = "SELECT * FROM publicaciones WHERE id = ?";
+  const query = `
+  SELECT 
+  publicaciones.id,
+  publicaciones.titulo,
+  publicaciones.descripcion,
+  publicaciones.precio,
+  publicaciones.tipo,
+  publicaciones.estado,
+  categorias.nombre AS categoria,
+  ubicaciones.departamento,
+  ubicaciones.municipio
+  FROM publicaciones 
+  inner join categorias on publicaciones.categoria_id = categorias.id
+  inner join ubicaciones on publicaciones.ubicacion_id = ubicaciones.id
+    where publicaciones.id = ?
+  `;
   const resultado = await db.query(query, [id]);
 
   return resultado[0][0];
