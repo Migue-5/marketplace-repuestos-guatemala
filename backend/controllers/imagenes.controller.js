@@ -11,7 +11,7 @@ const obtenerImagenesC = async (req, res) => {
 
     res.status(200).json(imagenes);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
 
     res.status(500).json({ mensaje: "Error al obtener imagenes" });
   }

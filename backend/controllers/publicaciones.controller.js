@@ -38,6 +38,7 @@ const obtenerPubPorIdC = async (req, res) => {
 const crearPublicacionC = async (req, res) => {
   try {
     const datos = req.body;
+    datos.usuario_id = req.usuario.id;
 
     if (!datos.titulo || !datos.precio || !datos.categoria_id) {
       return res.status(400).json({ mensaje: "Faltan campos obligatorios" });
@@ -48,6 +49,7 @@ const crearPublicacionC = async (req, res) => {
     res.status(201).json({ mensaje: "creada", id: nuevoId });
   } catch (error) {
     res.status(500).json({ mensaje: "Error al crear publicaciones" });
+    console.log(error);
   }
 };
 

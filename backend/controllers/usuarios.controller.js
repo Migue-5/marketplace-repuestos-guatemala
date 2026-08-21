@@ -64,4 +64,12 @@ const loginUsuario = async (req, res) => {
   }
 };
 
-module.exports = { registrarUsuario, loginUsuario };
+//obtener usuario
+const obtenerPerfil = async (req, res) => {
+  try {
+    res.status(200).json({ usuario: req.usuario });
+  } catch (error) {
+    res.status(500).json({ mensaje: "Error al obtener perfil" });
+  }
+};
+module.exports = { registrarUsuario, loginUsuario, obtenerPerfil };

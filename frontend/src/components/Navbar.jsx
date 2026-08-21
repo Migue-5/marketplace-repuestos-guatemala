@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { usuario, logout } = useAuth();
+  const { usuario, logout, cargando } = useAuth();
+  if (cargando) return null;
   return (
     <nav>
       <Link to="/">Marketplace repuestos</Link>
