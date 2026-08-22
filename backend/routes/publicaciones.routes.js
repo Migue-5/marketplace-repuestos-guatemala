@@ -6,11 +6,17 @@ const {
   crearPublicacionC,
   actualizarPublicacionC,
   eliminarPublicacionC,
+  obtenerPublicacionesPorUsuarioC,
 } = require("../controllers/publicaciones.controller");
 
 const router = express.Router();
 
 router.get("/", obtenerPublicacionesC);
+router.get(
+  "/mis-publicaciones",
+  verificarToken,
+  obtenerPublicacionesPorUsuarioC,
+);
 router.get("/:id", obtenerPubPorIdC);
 router.post("/", verificarToken, crearPublicacionC);
 router.put("/:id", verificarToken, actualizarPublicacionC);

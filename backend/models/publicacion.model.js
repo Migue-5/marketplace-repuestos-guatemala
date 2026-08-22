@@ -45,6 +45,27 @@ const obtenerPubPorID = async (id) => {
   return resultado[0][0];
 };
 
+//
+//
+// obtener publicaciones por usuario
+const obtenerPublicacionesPorUsuario = async (usuario_id) => {
+  const query = `
+  select
+  p.id, p.titulo, p.descripcion, p.precio, p.tipo, p.estado,
+  c.nombre as categoria,
+  u.departamento, u.municipio,
+  (select i.url_imagen from imagenes i where i.publicacion_id = p.id limit 1) as imagen
+  from publicaciones p
+  inner join categorias c on p.categoria_id = c.id
+  INNER JOIN ubicaciones u ON p.ubicacion_id = u.id
+  WHERE p.usuario_id = ?
+  `;
+
+  const resultado = await db.query(query, [usuario_id]);
+
+  return resultado[0];
+};
+
 // crearPublicacion publicacion
 const crearPublicacion = async (datos) => {
   const query = `INSERT INTO publicaciones 
@@ -91,6 +112,7 @@ const eliminarPublicacion = async (id) => {
 module.exports = {
   obtenerPublicaciones,
   obtenerPubPorID,
+  obtenerPublicacionesPorUsuario,
   crearPublicacion,
   actualizarPublicacion,
   eliminarPublicacion,

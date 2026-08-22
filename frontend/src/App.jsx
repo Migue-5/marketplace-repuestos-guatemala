@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Registro from "./pages/Registro";
 import Navbar from "./components/Navbar";
 import CrearPublicaciones from "./pages/CrearPublicaciones";
+import Perfil from "./pages/perfil";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/crear" element={<CrearPublicaciones />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </BrowserRouter>
     </div>

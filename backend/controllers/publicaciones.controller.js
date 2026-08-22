@@ -4,6 +4,7 @@ const {
   crearPublicacion,
   actualizarPublicacion,
   eliminarPublicacion,
+  obtenerPublicacionesPorUsuario,
 } = require("../models/publicacion.model");
 
 // obtener todas las publicaciones
@@ -26,6 +27,19 @@ const obtenerPubPorIdC = async (req, res) => {
     if (!publicacion) {
       return res.status(404).json({ mensaje: "no encontrada" });
     }
+
+    res.status(200).json(publicacion);
+  } catch (error) {
+    res.status(500).json({ mensaje: "Error al obtener publicaciones" });
+  }
+};
+//
+//
+// obtener publicaciones por usuario
+const obtenerPublicacionesPorUsuarioC = async (req, res) => {
+  try {
+    const id = req.usuario.id;
+    const publicacion = await obtenerPublicacionesPorUsuario(id);
 
     res.status(200).json(publicacion);
   } catch (error) {
@@ -106,6 +120,7 @@ const eliminarPublicacionC = async (req, res) => {
 module.exports = {
   obtenerPublicacionesC,
   obtenerPubPorIdC,
+  obtenerPublicacionesPorUsuarioC,
   crearPublicacionC,
   actualizarPublicacionC,
   eliminarPublicacionC,
