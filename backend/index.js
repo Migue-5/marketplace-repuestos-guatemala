@@ -21,6 +21,8 @@ app.use("/api/publicaciones", publicacionesRouter);
 // rutas de imagens
 app.use("/api/imagenes", imagenesRouter);
 
+app.use("/uploads", express.static("uploads"));
+
 // rutas usuarios
 app.use("/api/auth", usuariosRouter);
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 const CrearPublicaciones = () => {
+  const [archivo, setArchivo] = useState("");
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
@@ -36,7 +37,7 @@ const CrearPublicaciones = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/publicaciones", {
+      const respuestaPub = await api.post("/publicaciones", {
         titulo,
         descripcion,
         precio,
@@ -44,6 +45,21 @@ const CrearPublicaciones = () => {
         categoria_id,
         ubicacion_id,
       });
+
+      const nuevoId = respuestaPub.data.id;
+      console.log(archivo);
+
+      if (archivo) {
+        const formData = new FormData();
+        formData.append("imagen", archivo);
+        const respuestaUpload = await api.post("/imagenes/upload", formData);
+        const url = respuestaUpload.data.url;
+
+        await api.post("/imagenes", {
+          publicacion_id: nuevoId,
+          url_imagen: url,
+        });
+      }
 
       navigate("/");
     } catch (error) {
@@ -54,6 +70,14 @@ const CrearPublicaciones = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="imagen">Fotos</label>
+        <input
+          type="file"
+          id="imagen"
+          accept="image/*"
+          onChange={(e) => setArchivo(e.target.files[0])}
+        />
+
         <label htmlFor="titulo">titulo</label>
         <input
           type="text"

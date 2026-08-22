@@ -4,18 +4,18 @@ const db = require("../config/db");
 const obtenerPublicaciones = async () => {
   const query = `
   SELECT 
-  publicaciones.id,
-  publicaciones.titulo,
-  publicaciones.descripcion,
-  publicaciones.precio,
-  publicaciones.tipo,
-  publicaciones.estado,
-  categorias.nombre AS categoria,
-  ubicaciones.departamento,
-  ubicaciones.municipio
-  FROM publicaciones
-  inner join categorias on publicaciones.categoria_id = categorias.id
-  inner join ubicaciones on publicaciones.ubicacion_id = ubicaciones.id
+  p.id, 
+  p.titulo, 
+  p.descripcion,
+  p.precio, 
+  p.tipo,
+  p.estado,
+  c.nombre AS categoria,
+  u.departamento, u.municipio,
+  (SELECT i.url_imagen FROM imagenes i WHERE i.publicacion_id = p.id LIMIT 1) AS imagen
+FROM publicaciones p
+INNER JOIN categorias c ON p.categoria_id = c.id
+INNER JOIN ubicaciones u ON p.ubicacion_id = u.id
   `;
   const resultado = await db.query(query);
 

@@ -51,4 +51,23 @@ const eliminarImagenC = async (req, res) => {
   }
 };
 
-module.exports = { obtenerImagenesC, crearImagenesC, eliminarImagenC };
+// subir imagenes a uploads
+
+const subirImagenesC = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ mensaje: "No se subió ningún archivo" });
+    }
+
+    const url = `/uploads/${req.file.filename}`;
+    res.status(200).json({ url });
+  } catch (error) {
+    res.status(500).json({ mensaje: "Error al subir imagen" });
+  }
+};
+module.exports = {
+  obtenerImagenesC,
+  crearImagenesC,
+  eliminarImagenC,
+  subirImagenesC,
+};
