@@ -5,7 +5,7 @@ const ItemCard = ({ publicacion }) => {
         src={
           publicacion.imagen
             ? `http://localhost:5000${publicacion.imagen}`
-            : "https://placehold.co/300x200"
+            : null
         }
         alt={publicacion.titulo}
       />

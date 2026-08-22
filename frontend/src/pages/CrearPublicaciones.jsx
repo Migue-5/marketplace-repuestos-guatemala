@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 const CrearPublicaciones = () => {
-  const [archivo, setArchivo] = useState("");
+  const [archivos, setArchivos] = useState([]);
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
@@ -47,18 +47,23 @@ const CrearPublicaciones = () => {
       });
 
       const nuevoId = respuestaPub.data.id;
-      console.log(archivo);
+      console.log(archivos);
 
-      if (archivo) {
+      if (archivos.length > 0) {
         const formData = new FormData();
-        formData.append("imagen", archivo);
-        const respuestaUpload = await api.post("/imagenes/upload", formData);
-        const url = respuestaUpload.data.url;
-
-        await api.post("/imagenes", {
-          publicacion_id: nuevoId,
-          url_imagen: url,
+        archivos.forEach((archivo) => {
+          formData.append("imagenes", archivo);
         });
+
+        const respuestaUpload = await api.post("/imagenes/upload", formData);
+        const urls = respuestaUpload.data.urls;
+
+        for (const url of urls) {
+          await api.post("/imagenes", {
+            publicacion_id: nuevoId,
+            url_imagen: url,
+          });
+        }
       }
 
       navigate("/");
@@ -74,8 +79,9 @@ const CrearPublicaciones = () => {
         <input
           type="file"
           id="imagen"
+          multiple
           accept="image/*"
-          onChange={(e) => setArchivo(e.target.files[0])}
+          onChange={(e) => setArchivos(Array.from(e.target.files))}
         />
 
         <label htmlFor="titulo">titulo</label>

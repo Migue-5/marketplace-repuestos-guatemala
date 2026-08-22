@@ -13,6 +13,11 @@ const router = express.Router();
 router.get("/:id", obtenerImagenesC);
 router.post("/", crearImagenesC);
 router.delete("/:id", eliminarImagenC);
-router.post("/upload", verificarToken, upload.single("imagen"), subirImagenesC);
+router.post(
+  "/upload",
+  verificarToken,
+  upload.array("imagenes", 10),
+  subirImagenesC,
+);
 
 module.exports = router;
