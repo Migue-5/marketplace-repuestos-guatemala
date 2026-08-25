@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import styles from "./CrearPublicacion.module.css";
+
 const CrearPublicaciones = () => {
   const [archivos, setArchivos] = useState([]);
   const [titulo, setTitulo] = useState("");
@@ -73,87 +75,92 @@ const CrearPublicaciones = () => {
     }
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="imagen">Fotos</label>
-        <input
-          type="file"
-          id="imagen"
-          multiple
-          accept="image/*"
-          onChange={(e) => setArchivos(Array.from(e.target.files))}
-        />
+    <div className={styles.page}>
+      <div className={styles.container}>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="imagen" className={styles.btnimagen}>
+            <span>+ Agregar fotos</span>
+          </label>
 
-        <label htmlFor="titulo">titulo</label>
-        <input
-          type="text"
-          id="titulo"
-          required
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
-        />
+          <input
+            className={styles.inputOculto}
+            type="file"
+            id="imagen"
+            multiple
+            accept="image/*"
+            onChange={(e) => setArchivos(Array.from(e.target.files))}
+          />
 
-        <label htmlFor="descripcion">descripcion</label>
-        <input
-          type="text"
-          id="descripcion"
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
-          required
-        />
+          <label htmlFor="titulo">titulo</label>
+          <input
+            type="text"
+            id="titulo"
+            required
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+          />
 
-        <label htmlFor="precio">precio</label>
-        <input
-          type="number"
-          id="precio"
-          value={precio}
-          onChange={(e) => setPrecio(e.target.value)}
-          required
-        />
+          <label htmlFor="descripcion">descripcion</label>
+          <textarea
+            type="text"
+            id="descripcion"
+            value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
+            required></textarea>
 
-        <label htmlFor="tipo">tipo</label>
-        <select
-          name="tipo"
-          id="tipo"
-          value={tipo}
-          onChange={(e) => setTipo(e.target.value)}
-          required>
-          <option value="">Selecciona tipo</option>
-          <option value="repuesto"> repuesto</option>
-          <option value="vehiculo"> vehiculo</option>
-        </select>
+          <label htmlFor="precio">precio</label>
+          <input
+            type="number"
+            id="precio"
+            value={precio}
+            onChange={(e) => setPrecio(e.target.value)}
+            required
+          />
 
-        <label htmlFor="categoria">categoria</label>
-        <select
-          id="categoria"
-          value={categoria_id}
-          onChange={(e) => setCategoria_id(e.target.value)}
-          required>
-          <option value="">Selecciona categoria</option>
-          {categorias.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-              {cat.nombre}
-            </option>
-          ))}
-        </select>
+          <label htmlFor="tipo">tipo</label>
+          <select
+            name="tipo"
+            id="tipo"
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+            required>
+            <option value="">Selecciona tipo</option>
+            <option value="repuesto"> repuesto</option>
+            <option value="vehiculo"> vehiculo</option>
+          </select>
 
-        <label htmlFor="ubicacion">Ubicacion</label>
-        <select
-          id="ubicacion"
-          value={ubicacion_id}
-          onChange={(e) => setUbicacion_id(e.target.value)}
-          required>
-          <option value="">seleccionar ubicacion</option>
-          {ubicaciones.map((ubi) => (
-            <option key={ubi.id} value={ubi.id}>
-              {ubi.municipio},{ubi.departamento}
-            </option>
-          ))}
-        </select>
-        {error && <p>{error}</p>}
+          <label htmlFor="categoria">categoria</label>
+          <select
+            id="categoria"
+            value={categoria_id}
+            onChange={(e) => setCategoria_id(e.target.value)}
+            required>
+            <option value="">Selecciona categoria</option>
+            {categorias.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.nombre}
+              </option>
+            ))}
+          </select>
 
-        <button type="submit">Crear publicacion</button>
-      </form>
+          <label htmlFor="ubicacion">Ubicacion</label>
+          <select
+            id="ubicacion"
+            value={ubicacion_id}
+            onChange={(e) => setUbicacion_id(e.target.value)}
+            required>
+            <option value="">seleccionar ubicacion</option>
+            {ubicaciones.map((ubi) => (
+              <option key={ubi.id} value={ubi.id}>
+                {ubi.municipio},{ubi.departamento}
+              </option>
+            ))}
+          </select>
+          {error && <p className={styles.error}>{error}</p>}
+
+          <button type="submit">Crear publicacion</button>
+        </form>
+      </div>
     </div>
   );
 };
