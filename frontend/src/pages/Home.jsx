@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import ItemCard from "../components/ItemCard";
-
+import styles from "./Home.module.css";
 const Home = () => {
   const [publicaciones, setPublicaciones] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -27,11 +27,11 @@ const Home = () => {
       {cargando && <p>Cargando...</p>}
       {error && <p>{error}</p>}
       {!cargando && !error && (
-        <ul>
+        <div className={styles.grid}>
           {publicaciones.map((pub) => (
             <ItemCard key={pub.id} publicacion={pub} />
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
