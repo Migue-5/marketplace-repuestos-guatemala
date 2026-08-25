@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
+import styles from "./Registro.module.css";
 
 const Registro = () => {
   const [nombre, setNombre] = useState("");
@@ -23,43 +24,53 @@ const Registro = () => {
     }
   };
   return (
-    <div>
-      <h2>Registrate</h2>
-      <form onSubmit={handleSubmit} className="form-registro">
-        <label htmlFor="nombre">nombre</label>
-        <input
-          type="text"
-          id="nombre"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-        />
+    <div className={styles.page}>
+      <div className={styles.container}>
+        {" "}
+        <h2>Registrate</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="nombre">nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+          />
 
-        <label htmlFor="telefono">Teléfono</label>
-        <input
-          type="text"
-          id="telefono"
-          value={telefono}
-          onChange={(e) => setTelefono(e.target.value)}
-        />
+          <label htmlFor="telefono">Teléfono</label>
+          <input
+            type="text"
+            id="telefono"
+            value={telefono}
+            onChange={(e) => setTelefono(e.target.value)}
+          />
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {error && <p>{error}</p>}
-        <button type="submit">Enviar</button>
-      </form>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {error && <p className={styles.error}>{error}</p>}
+          <button type="submit">Registrarse</button>
+
+          <p className={styles.footer}>
+            ¿Ya tenés cuenta?{" "}
+            <Link className={styles.link} to="/login">
+              Inicia sesion
+            </Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };
