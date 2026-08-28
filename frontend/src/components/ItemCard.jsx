@@ -1,8 +1,9 @@
 import styles from "./ItemCard.module.css";
+import { Link } from "react-router-dom";
 
 const ItemCard = ({ publicacion }) => {
   return (
-    <div className={styles.card}>
+    <Link to={`/publicacion/${publicacion.id}`} className={styles.card}>
       <img
         className={styles.imagen}
         src={
@@ -20,7 +21,7 @@ const ItemCard = ({ publicacion }) => {
           {publicacion.categoria}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

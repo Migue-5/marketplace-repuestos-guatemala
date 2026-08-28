@@ -77,6 +77,7 @@ const CrearPublicaciones = () => {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
+        <h2>Crear publicacion</h2>
         <form onSubmit={handleSubmit}>
           <label htmlFor="imagen" className={styles.btnimagen}>
             <span>+ Agregar fotos</span>

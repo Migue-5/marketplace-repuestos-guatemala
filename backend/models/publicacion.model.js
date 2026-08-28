@@ -34,15 +34,25 @@ const obtenerPubPorID = async (id) => {
   publicaciones.estado,
   categorias.nombre AS categoria,
   ubicaciones.departamento,
-  ubicaciones.municipio
+  ubicaciones.municipio,
+  usuarios.nombre,
+  usuarios.telefono
   FROM publicaciones 
   inner join categorias on publicaciones.categoria_id = categorias.id
   inner join ubicaciones on publicaciones.ubicacion_id = ubicaciones.id
+  inner join usuarios on publicaciones.usuario_id = usuarios.id 
     where publicaciones.id = ?
   `;
-  const resultado = await db.query(query, [id]);
 
-  return resultado[0][0];
+  const query2 = `SELECT url_imagen from imagenes where publicacion_id = ?`;
+
+  const resultado = await db.query(query, [id]);
+  const resultadoImagenes = await db.query(query2, [id]);
+
+  const publicacion = resultado[0][0];
+  publicacion.imagenes = resultadoImagenes[0];
+
+  return publicacion;
 };
 
 //
