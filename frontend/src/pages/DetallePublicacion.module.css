@@ -1,0 +1,85 @@
+.page {
+  padding: 0;
+  max-width: 100%;
+}
+
+.contenido {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  height: 100vh;
+}
+
+.imagenes {
+  /* display: flex;
+  gap: 0.5rem;
+  overflow-x: auto; */
+  position: relative;
+  height: 100vh;
+}
+
+.imagenes img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.info {
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.info h1 {
+  margin: 0 0 0.3rem 0;
+  font-size: 2rem;
+}
+
+.precio {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #4338ca;
+}
+
+.vendedor {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.vendedor h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.flechaIzq,
+.flechaDer {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #f8fafc;
+  color: black;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.flechaDer:hover,
+.flechaIzq:hover {
+  background: #e4e5e6;
+}
+
+.flechaIzq {
+  left: 1rem;
+}
+
+.flechaDer {
+  right: 1rem;
+}
