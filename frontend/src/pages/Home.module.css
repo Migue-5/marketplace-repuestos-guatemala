@@ -4,3 +4,24 @@
   gap: 1.5rem;
   padding: 2rem;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  margin-top: 1.5rem;
+}
+
+.botonCrear {
+  background-color: #4338ca;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.botonCrear:hover {
+  background-color: #3526d4;
+}

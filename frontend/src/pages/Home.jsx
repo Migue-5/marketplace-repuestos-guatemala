@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
 import ItemCard from "../components/ItemCard";
 import styles from "./Home.module.css";
+
 const Home = () => {
   const [publicaciones, setPublicaciones] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
+  const { usuario } = useAuth();
   useEffect(() => {
     const cargarPublicaciones = async () => {
       try {
@@ -24,6 +28,13 @@ const Home = () => {
   }, []);
   return (
     <div>
+      <div className={styles.header}>
+        <h1>Publicaciones</h1>
+
+        <Link to={usuario ? "/crear" : "/login"} className={styles.botonCrear}>
+          + Crear publicación
+        </Link>
+      </div>
       {cargando && <p>Cargando...</p>}
       {error && <p>{error}</p>}
       {!cargando && !error && (
