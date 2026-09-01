@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import ItemCard from "../components/ItemCard";
-import s from "./Home.module.css";
+import s from "./Perfil.module.css";
 
 const Perfil = () => {
   const [publicaciones, setPublicaciones] = useState([]);
@@ -53,8 +53,8 @@ const Perfil = () => {
     }
   };
   return (
-    <div>
-      <div>
+    <div className={s.page}>
+      <div className={s.tarjetaUsuario}>
         {editando ? (
           <form onSubmit={handleGuardar}>
             <label htmlFor="nombre">Nombre</label>
@@ -82,17 +82,16 @@ const Perfil = () => {
             <button onClick={() => setEditando(true)}>Editar perfil</button>
           </>
         )}
-        <hr />
       </div>
       <h2>Publicaciones</h2>
       {cargando && <p>Cargando...</p>}
       {error && <p>{error}</p>}
       {!cargando && !error && (
-        <ul className={s.grid}>
+        <div className={s.grid}>
           {publicaciones.map((pub) => (
             <ItemCard key={pub.id} publicacion={pub} />
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

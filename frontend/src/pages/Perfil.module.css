@@ -1,0 +1,60 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.page {
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.tarjetaUsuario {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.tarjetaUsuario h1 {
+  margin: 0 0 0.2rem 0;
+  font-size: 1.4rem;
+}
+
+.tarjetaUsuario h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.tarjetaUsuario form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.tarjetaUsuario input {
+  padding: 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.tarjetaUsuario button {
+  padding: 0.6rem 1.2rem;
+  background-color: #4338ca;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.tarjetaUsuario button:hover {
+  background-color: #3526d4;
+}
