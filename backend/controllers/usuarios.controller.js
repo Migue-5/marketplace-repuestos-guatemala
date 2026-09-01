@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const {
   crearUsuario,
   obtenerUsuarioPorEmail,
+  actualizarUsuario,
+  obtenerPerfilPorId,
 } = require("../models/usuario.model");
 
 // funcion de registrar usuario
@@ -64,12 +66,33 @@ const loginUsuario = async (req, res) => {
   }
 };
 
-//obtener usuario
+// obtener por id
 const obtenerPerfil = async (req, res) => {
   try {
-    res.status(200).json({ usuario: req.usuario });
+    const usuario = await obtenerPerfilPorId(req.usuario.id);
+    res.status(200).json({ usuario });
   } catch (error) {
     res.status(500).json({ mensaje: "Error al obtener perfil" });
   }
 };
-module.exports = { registrarUsuario, loginUsuario, obtenerPerfil };
+
+// actualizar usuario
+const actualizarUsuarioC = async (req, res) => {
+  try {
+    const id = req.usuario.id;
+    const datos = req.body;
+
+    const resultado = await actualizarUsuario(id, datos);
+
+    res.status(200).json({ mensaje: "perfil actualizado" });
+  } catch (error) {
+    res.status(500).json({ mensaje: "Error al actualizar perfil" });
+  }
+};
+
+module.exports = {
+  registrarUsuario,
+  loginUsuario,
+  obtenerPerfil,
+  actualizarUsuarioC,
+};

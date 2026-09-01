@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Registro from "./pages/Registro";
 import Navbar from "./components/Navbar";
 import CrearPublicaciones from "./pages/CrearPublicaciones";
-import Perfil from "./pages/perfil";
+import Perfil from "./pages/Perfil";
 import DetallePublicacion from "./pages/DetallePublicacion";
 
 const App = () => {
