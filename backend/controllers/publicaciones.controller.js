@@ -10,7 +10,8 @@ const {
 // obtener todas las publicaciones
 const obtenerPublicacionesC = async (req, res) => {
   try {
-    const publicaciones = await obtenerPublicaciones();
+    const filtros = req.query;
+    const publicaciones = await obtenerPublicaciones(filtros);
 
     res.status(200).json(publicaciones);
   } catch (error) {

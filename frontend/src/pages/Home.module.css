@@ -25,3 +25,10 @@
 .botonCrear:hover {
   background-color: #3526d4;
 }
+
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}

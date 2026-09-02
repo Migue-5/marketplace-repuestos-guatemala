@@ -1,23 +1,36 @@
 const db = require("../config/db");
 
 // obtener todas
-const obtenerPublicaciones = async () => {
+const obtenerPublicaciones = async (filtros = {}) => {
+  const condiciones = [];
+  const valores = [];
+
+  if (filtros.categoria_id) {
+    condiciones.push("p.categoria_id = ?");
+    valores.push(filtros.categoria_id);
+  }
+
+  if (filtros.ubicacion_id) {
+    condiciones.push("p.ubicacion_id = ?");
+    valores.push(filtros.ubicacion_id);
+  }
+
+  const whereClause =
+    condiciones.length > 0 ? "WHERE " + condiciones.join(" AND ") : "";
+
   const query = `
-  SELECT 
-  p.id, 
-  p.titulo, 
-  p.descripcion,
-  p.precio, 
-  p.tipo,
-  p.estado,
-  c.nombre AS categoria,
-  u.departamento, u.municipio,
-  (SELECT i.url_imagen FROM imagenes i WHERE i.publicacion_id = p.id LIMIT 1) AS imagen
-FROM publicaciones p
-INNER JOIN categorias c ON p.categoria_id = c.id
-INNER JOIN ubicaciones u ON p.ubicacion_id = u.id
+    SELECT 
+    p.id, p.titulo, p.descripcion, p.precio, p.tipo, p.estado,
+    c.nombre AS categoria,
+    u.departamento, u.municipio,
+    (SELECT i.url_imagen FROM imagenes i WHERE i.publicacion_id = p.id LIMIT 1) AS imagen
+    FROM publicaciones p
+    INNER JOIN categorias c ON p.categoria_id = c.id
+    INNER JOIN ubicaciones u ON p.ubicacion_id = u.id
+    ${whereClause}
   `;
-  const resultado = await db.query(query);
+
+  const resultado = await db.query(query, valores);
 
   return resultado[0];
 };
