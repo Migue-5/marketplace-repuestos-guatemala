@@ -15,7 +15,10 @@ const Navbar = () => {
       <div className={styles.links}>
         {usuario ? (
           <>
-            <span>Hola {usuario.nombre}</span>
+            <Link to="/perfil">
+              <span> {usuario.nombre}</span>
+            </Link>
+
             <button onClick={logout}>Cerrar sesión</button>
           </>
         ) : (

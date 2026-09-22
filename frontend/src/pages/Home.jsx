@@ -16,6 +16,8 @@ const Home = () => {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
   const [ubicacionSeleccionada, setUbicacionSeleccionada] = useState("");
 
+  const [busqueda, setBusqueda] = useState("");
+
   const { usuario } = useAuth();
 
   // cargar categorias y ubicaciones
@@ -40,6 +42,8 @@ const Home = () => {
     const cargarPublicaciones = async () => {
       try {
         const params = {};
+
+        if (busqueda) params.buscar = busqueda;
         if (categoriaSeleccionada) params.categoria_id = categoriaSeleccionada;
         if (ubicacionSeleccionada) params.ubicacion_id = ubicacionSeleccionada;
 
@@ -53,7 +57,8 @@ const Home = () => {
     };
 
     cargarPublicaciones();
-  }, [categoriaSeleccionada, ubicacionSeleccionada]);
+  }, [categoriaSeleccionada, ubicacionSeleccionada, busqueda]);
+
   return (
     <div className={styles.layout}>
       <Sidebar
@@ -66,6 +71,14 @@ const Home = () => {
       <div>
         <div className={styles.header}>
           <h1>Publicaciones</h1>
+
+          <input
+            className={styles.buscador}
+            type="text"
+            placeholder="Buscar repuestos..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
 
           <Link
             to={usuario ? "/crear" : "/login"}

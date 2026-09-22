@@ -52,6 +52,21 @@ const Perfil = () => {
       setError("error al actualizar perfil");
     }
   };
+
+  // funcion eliminar publicaciones
+  const handleEliminar = async (id) => {
+    try {
+      await api.delete(`/publicaciones/${id}`);
+
+      setPublicaciones(
+        publicaciones.filter((publicacion) => publicacion.id !== id),
+      );
+    } catch (error) {
+      console.log(error);
+
+      setError("error al eliminar");
+    }
+  };
   return (
     <div className={s.page}>
       <div className={s.tarjetaUsuario}>
@@ -89,7 +104,12 @@ const Perfil = () => {
       {!cargando && !error && (
         <div className={s.grid}>
           {publicaciones.map((pub) => (
-            <ItemCard key={pub.id} publicacion={pub} />
+            <ItemCard
+              key={pub.id}
+              publicacion={pub}
+              mostrarEliminar={true}
+              onEliminar={handleEliminar}
+            />
           ))}
         </div>
       )}

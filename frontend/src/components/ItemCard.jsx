@@ -1,7 +1,7 @@
 import styles from "./ItemCard.module.css";
 import { Link } from "react-router-dom";
 
-const ItemCard = ({ publicacion }) => {
+const ItemCard = ({ publicacion, mostrarEliminar, onEliminar }) => {
   return (
     <Link to={`/publicacion/${publicacion.id}`} className={styles.card}>
       <img
@@ -21,6 +21,18 @@ const ItemCard = ({ publicacion }) => {
           {publicacion.categoria}
         </p>
       </div>
+
+      {mostrarEliminar && (
+        <button
+          className={styles.buttonE}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onEliminar(publicacion.id);
+          }}>
+          Eliminar
+        </button>
+      )}
     </Link>
   );
 };

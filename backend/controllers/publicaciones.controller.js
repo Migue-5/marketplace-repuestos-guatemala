@@ -114,6 +114,8 @@ const eliminarPublicacionC = async (req, res) => {
 
     res.status(204).json({ mensaje: "publicacion eliminada" });
   } catch (error) {
+    // console.log(error);
+
     res.status(500).json({ mensaje: "Error al eliminar publicaciones" });
   }
 };

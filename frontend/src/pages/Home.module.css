@@ -32,3 +32,18 @@
   gap: 2rem;
   padding: 2rem;
 }
+
+.buscador {
+  flex: 1;
+  max-width: 400px;
+  padding: 0.6rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin: 0 1.5rem;
+}
+
+.buscador:focus {
+  outline: none;
+  border-color: #4338ca;
+}

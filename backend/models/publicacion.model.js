@@ -15,6 +15,11 @@ const obtenerPublicaciones = async (filtros = {}) => {
     valores.push(filtros.ubicacion_id);
   }
 
+  if (filtros.buscar) {
+    condiciones.push("p.titulo LIKE ?");
+    valores.push(`%${filtros.buscar}%`);
+  }
+
   const whereClause =
     condiciones.length > 0 ? "WHERE " + condiciones.join(" AND ") : "";
 

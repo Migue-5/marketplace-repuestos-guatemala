@@ -41,3 +41,12 @@
   color: #6b7280;
   margin: 0;
 }
+
+.buttonE {
+  background-color: rgb(230, 42, 42);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 5px;
+}
